@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import ReactMarkdown from "react-markdown";
-import SyntaxHighlighter from "react-syntax-highlighter";
-import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { formatLunarDate } from "../util/DateUtil";
 import { Headphones } from "lucide-react";
+import MarkdownPreview from "@uiw/react-markdown-preview";
 
 export default function PostContent({ collection, postDetail, postContent }) {
   const [openVideoUrl, setOpenVideoUrl] = useState(null);
@@ -25,29 +23,12 @@ export default function PostContent({ collection, postDetail, postContent }) {
       </div>
 
       <div className="font-sfpro text-md md:text-xl">
-        <ReactMarkdown
-          components={{
-            code({ node, inline, className, children, ...props }) {
-              const match = /language-(\w+)/.exec(className || "");
-              return !inline && match ? (
-                <SyntaxHighlighter
-                  style={docco}
-                  language={match[1]}
-                  PreTag="div"
-                  {...props}
-                >
-                  {String(children).replace(/\n$/, "")}
-                </SyntaxHighlighter>
-              ) : (
-                <code className={className} {...props}>
-                  {children}
-                </code>
-              );
-            },
+        <MarkdownPreview
+          source={postContent}
+          wrapperElement={{
+            "data-color-mode": "light",
           }}
-        >
-          {postContent}
-        </ReactMarkdown>
+        />
       </div>
 
       <div className="bg-green-800 text-white p-6 mb-12 mt-12">
