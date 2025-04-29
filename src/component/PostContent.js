@@ -57,9 +57,9 @@ export default function PostContent({ collection, postDetail, postContent }) {
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <img src={postDetail.metadata.images[0]} />
-          <img src={postDetail.metadata.images[1]} />
-          <img src={postDetail.metadata.images[2]} />
+          <img src={postDetail.metadata.images[0]} className="object-cover" />
+          <img src={postDetail.metadata.images[1]} className="object-cover" />
+          <img src={postDetail.metadata.images[2]} className="object-cover" />
         </div>
 
         <div
@@ -73,9 +73,7 @@ export default function PostContent({ collection, postDetail, postContent }) {
           {postDetail.metadata.action.map((e, index) => (
             <button
               key={index}
-              onClick={() =>
-                setOpenVideoUrl("https://www.youtube.com/embed/cZm3Mr2lOEs")
-              }
+              onClick={() => setOpenVideoUrl(e.url)}
               className="hover:bg-white hover:text-green-800 font-medium border-2 border-white w-fit bg-white bg-opacity-10 text-white py-2 px-4 rounded-full flex items-center justify-center"
             >
               <Headphones className="mr-3" />
